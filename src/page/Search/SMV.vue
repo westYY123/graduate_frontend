@@ -16,7 +16,7 @@
 import { computed, reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { usePlayerStore } from '@/stores/player'
-import { searchApi } from '@/api/search'
+// import { searchApi } from '@/api/search'
 import CPagination from '../../components/common/CPagination.vue'
 import CVideoList from '../../components/common/CVideoList.vue'
 const route = useRoute()
@@ -39,9 +39,9 @@ let mvs = ref()
 
 async function getSearchMV() {
   isLoading.value = true
-  const res: any = await searchApi(keywords.value, 1004, (pageInfo.curPage - 1) * 24, pageInfo.pageSize)
-  pageInfo.total = res.result.mvCount
-  mvs.value = res.result.mvs
+  // const res: any = await searchApi(keywords.value, 1004, (pageInfo.curPage - 1) * 24, pageInfo.pageSize)
+  // pageInfo.total = res.result.mvCount
+  // mvs.value = res.result.mvs
   isLoading.value = false
 }
 

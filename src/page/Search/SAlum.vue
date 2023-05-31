@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { searchApi } from '@/api/search'
+// import { searchApi } from '@/api/search'
 import CPlaylist from '@/components/common/CPlaylist.vue'
 import CPagination from '@/components/common/CPagination.vue'
 const route = useRoute()
@@ -36,9 +36,9 @@ let albums = ref()
 
 async function getSearchAlbum() {
   isLoading.value = true
-  const res: any = await searchApi(keywords.value, 10, (pageInfo.curPage - 1) * 30)
-  pageInfo.total = res.result.albumCount
-  albums.value = res.result.albums
+  // const res: any = await searchApi(keywords.value, 10, (pageInfo.curPage - 1) * 30)
+  // pageInfo.total = res.result.albumCount
+  // albums.value = res.result.albums
   isLoading.value = false
 }
 

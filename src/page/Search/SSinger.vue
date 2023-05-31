@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { searchApi } from '@/api/search'
+// import { searchApi } from '@/api/search'
 import CPagination from '../../components/common/CPagination.vue'
 import CSingerList from '../../components/common/CSingerList.vue'
 
@@ -39,10 +39,10 @@ let singerlist = ref()
 
 async function getSearchSinger() {
   isLoading.value = true
-  const res: any = await searchApi(keywords.value, 100, (pageInfo.curPage - 1) * 30)
-  pageInfo.total = res.result.artistCount
-  singerlist.value = res.result.artists
-  console.log(singerlist.value)
+  // const res: any = await searchApi(keywords.value, 100, (pageInfo.curPage - 1) * 30)
+  // pageInfo.total = res.result.artistCount
+  // singerlist.value = res.result.artists
+  // console.log(singerlist.value)
   isLoading.value = false
 }
 
