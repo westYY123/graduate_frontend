@@ -43,16 +43,16 @@ const router = createRouter({
         },
       ],
     },
-    {
-      path: '/video',
-      component: () => import('@/page/Video/index.vue'),
-      name: 'video',
-      props($route) {
-        return {
-          id: $route.params.id,
-        }
-      },
-    },
+    // {
+    //   path: '/video',
+    //   component: () => import('@/page/Video/index.vue'),
+    //   name: 'video',
+    //   props($route) {
+    //     return {
+    //       id: $route.params.id,
+    //     }
+    //   },
+    // },
     {
       path: '/dailyStar',
       name: 'dailyStar',
@@ -144,16 +144,16 @@ const router = createRouter({
       }
     },
     // 视频详情页
-    {
-      path: '/videoDtails/:id',
-      component: () => import('@/page/Video/VideoDetails.vue'),
-      name: 'videoDetails',
-      props($route) {
-        return {
-          id: $route.params.id,
-        }
-      },
-    },
+    // {
+    //   path: '/videoDtails/:id',
+    //   component: () => import('@/page/Video/VideoDetails.vue'),
+    //   name: 'videoDetails',
+    //   props($route) {
+    //     return {
+    //       id: $route.params.id,
+    //     }
+    //   },
+    // },
     // 搜索模块
     {
       path: '/search',
