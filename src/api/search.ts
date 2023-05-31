@@ -1,8 +1,8 @@
 import request from './request'
 
-export const searchApi = (keywords: string | string[], type: number, offset: number, limit: number = 30) => {
+export const searchSongApi = (keywords: string | string[]) => {
   return request({
-    url: `/cloudsearch?keywords=${keywords}&type=${type}&offset=${offset}&limit=${limit}`,
+    url: `/songs/search?keywords=${keywords}`,
     method: 'GET',
   })
 }

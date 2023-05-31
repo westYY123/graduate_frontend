@@ -24,16 +24,16 @@ const tabs = [
     name: 'songList',
     path: '/discover/songList',
   },
-  {
-    label: '排行榜',
-    name: 'rank',
-    path: '/discover/rank',
-  },
-  {
-    label: '歌手',
-    name: 'singer',
-    path: '/discover/singer',
-  },
+  // {
+  //   label: '排行榜',
+  //   name: 'rank',
+  //   path: '/discover/rank',
+  // },
+  // {
+  //   label: '歌手',
+  //   name: 'singer',
+  //   path: '/discover/singer',
+  // },
 ]
 </script>
 

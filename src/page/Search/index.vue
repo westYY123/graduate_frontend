@@ -27,9 +27,6 @@ const route = useRoute()
 const tabs = [
   { label: '单曲', name: 'searchSongs', path: 'search/songs' },
   { label: '歌手', name: 'searchSinger', path: 'search/singer' },
-  { label: '歌单', name: 'searchPlaylist', path: 'search/playlist' },
-  { label: '专辑', name: 'searchAlbum', path: 'search/album' },
-  { label: 'MV', name: 'searchMV', path: 'search/video' },
 ]
 </script>
 

@@ -28,6 +28,15 @@
         <Login :closeDialog="closeDialog"></Login>
       </el-dialog>
     </div>
+    <div class="toRegister">
+      <div v-if="!cookie">
+        <img @click="registerDialogIsVisible = true" src="./img/login.jpg" alt="" />
+        <span @click="registerDialogIsVisible = true" alt="">用户注册</span>
+      </div>
+      <el-dialog v-model="registerDialogIsVisible" width="30%" :modal="false" :center="true" :draggable="true" top="10vh">
+        <Register :closeDialog="closeDialog"></Register>
+      </el-dialog>
+    </div>
     <div class="quit" v-if="cookie">
       <el-button :icon="SwitchButton" circle size="large" @click="quitDialogIsVisible = true" />
     </div>
@@ -48,7 +57,8 @@ import { ArrowLeft, ArrowRight, Search, SwitchButton } from '@element-plus/icons
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router'
 import Login from '../Login/index.vue'
-import { getAccountInfoApi, logoutApi } from '@/api/login'
+import Register from "@/components/Login/register.vue";
+import {getAccountInfoApi, logoutApi, register} from '@/api/login'
 import { hotSearchApi } from '@/api/search'
 import { ElMessage } from 'element-plus';
 import { useUserStore } from '@/stores/user'
@@ -72,12 +82,7 @@ function toSearch() {
 }
 
 let hotSearch = ref()
-// 热搜榜单
-// async function getHotSearch() {
-//   const res: any = await hotSearchApi()
-//   hotSearch.value = res.data
-// }
-// 跳转热搜
+
 function goHotSearch(searchWord: string) {
   router.push({
     name: 'searchSongs',
@@ -89,9 +94,11 @@ function goHotSearch(searchWord: string) {
 
 let loginDialogIsVisible = ref(false)
 let quitDialogIsVisible = ref(false)
+let registerDialogIsVisible = ref(false)
 
 function closeDialog() {
   loginDialogIsVisible.value = false
+  registerDialogIsVisible.value = false
 }
 
 function toLogout() {
@@ -190,7 +197,7 @@ header {
 
   .toLogin {
     position: absolute;
-    right: 100px;
+    right: 180px;
 
     div {
       img {
@@ -212,7 +219,30 @@ header {
       cursor: pointer;
     }
   }
+  .toRegister {
+    position: absolute;
+    right: 50px;
 
+    div {
+      img {
+        width: 40px;
+        border-radius: 50%;
+        vertical-align: middle;
+        margin: 0 5px;
+        cursor: pointer;
+      }
+
+      span {
+        color: white;
+        font-family: '等线';
+        font-size: 15px;
+      }
+    }
+
+    .userInfo {
+      cursor: pointer;
+    }
+  }
   .quit {
     position: absolute;
     right: 40px;

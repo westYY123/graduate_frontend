@@ -17,3 +17,7 @@ export const getAccountInfoApi = () => {
 export const loginByPassword = (userName: string, passWord: string) => {
   return request.post('/user/login', {username: userName, password: passWord})
 }
+
+export const register = (userName: string, passWord: string, gender: string) => {
+  return request.post('/user/register', {username: userName, password: passWord, gender: gender})
+}

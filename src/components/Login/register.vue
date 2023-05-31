@@ -1,17 +1,20 @@
 <template>
-  <div class="login">
-    <div class="passwordLogin">
+  <div class="register">
+    <div class="registerPass">
       <div class="logo" >
         <img src="./img/logo.jpg" alt="" />
       </div>
-      <el-form :model="loginForm" status-icon :rules="loginRule" label-width="auto" class="loginForm">
+      <el-form :model="registerForm" status-icon :rules="registerRule" label-width="auto" class="registerForm">
         <el-form-item label="用户名：" prop="telphone">
-          <el-input v-model.trim="loginForm.userName" type="input" placeholder="请输入您的用户名" />
+          <el-input v-model.trim="registerForm.userName" type="input" placeholder="请输入您的用户名" />
         </el-form-item>
         <el-form-item class="captcha" label="密码：" prop="captcha">
-          <el-input v-model.trim="loginForm.passWord" type="password" placeholder="输入密码"/>
+          <el-input v-model.trim="registerForm.passWord" type="password" placeholder="输入密码"/>
         </el-form-item>
-        <el-button @click="loginOfPassword" class="loginBtn">登录</el-button>
+        <el-form-item class="gender" label="性别：" prop="gender">
+          <el-input v-model.trim="registerForm.gender" type="input" placeholder="输入性别"/>
+        </el-form-item>
+        <el-button @click="registerBy" class="loginBtn">注册</el-button>
       </el-form>
     </div>
   </div>
@@ -20,57 +23,56 @@
 <script setup lang="ts">
 import { ref, reactive, defineProps } from 'vue'
 import { ElMessage } from 'element-plus'
-import { loginByPassword } from '@/api/login'
+import { register } from '@/api/login'
 import { useRouter } from 'vue-router';
-import Register from '../Login/register.vue'
 const router = useRouter()
 const { closeDialog } = defineProps(['closeDialog'])
 
-let loginForm = reactive({
+let registerForm = reactive({
   userName: '',
-  passWord: ''
+  passWord: '',
+  gender: ''
 })
 
-const loginRule = reactive({
+const registerRule = reactive({
   userName: [
     { required: true, message: '账号必填', trigger: 'blur' },
   ],
   passWord: [
     { required: true, message: '密码必填', trigger: 'blur' },
   ],
+  gender: [
+    { required: true, message: '性别必填', trigger: 'blur' },
+  ]
 })
 
-function loginOfPassword() {
-  if (loginForm.userName.length < 8 && loginForm.passWord.length < 4) {
+function registerBy() {
+  if (registerForm.userName.length < 8 && registerForm.passWord.length < 4) {
     ElMessage.warning(`格式不正确`)
   }
-  loginByPassword(loginForm.userName, loginForm.passWord).then(
+  register(registerForm.userName, registerForm.passWord, registerForm.gender).then(
       res => {
         if (res.code === 0) {
-          localStorage.setItem('token', res.data.token)
-          localStorage.setItem('cookie', res.cookie)
-          ElMessage.success('登录成功')
-            closeDialog()
+          ElMessage.success('注册成功')
+          closeDialog()
           router.go(0)
         } else if (res.code === 1) {
-          ElMessage.error('用户不存在')
+          ElMessage.error('用户名不可用')
         } else if (res.code === 2) {
           ElMessage.error('内部错误')
-        } else if (res.code === 3) {
-          ElMessage.error('密码错误')
         }
       }
   ).catch(_ => {
     console.log(_)
-    ElMessage.error('登录失败')
+    ElMessage.error('注册失败')
   })
 }
 
 </script>
 
 <style lang="less" scoped>
-.login {
-  .passwordLogin {
+.register {
+  .registerPass {
     padding: 0 0.5rem;
 
     .suggest {
@@ -110,7 +112,7 @@ function loginOfPassword() {
       }
     }
 
-    .loginForm {
+    .registerForm {
       width: 100%;
       display: flex;
       flex-direction: column;

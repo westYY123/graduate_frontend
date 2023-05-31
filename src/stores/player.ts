@@ -42,20 +42,17 @@ export const usePlayerStore = defineStore('player', {
 
   },
   actions: {
-    // 如果index变动了，需要变动curSongInfo 、 curSongUrl 和 歌词 还有评论
     async updateCurSong() {
       this.curSongInfo.id = this.playlist[this.index].SongId
+      console.log(this.playlist[this.index].SongId)
       this.curSongInfo.name = this.playlist[this.index].SongName
-      // 获取歌曲url
       const urlRes: any = await songUrlApi(this.curSongInfo.id)
-      console.log(urlRes.data)
       this.curSongUrl = urlRes.data[0].url
-      // 获取 纯字符串的歌词
       const lyricRes: any = await lyricApi(this.curSongInfo.id)
       const lyricStr = lyricRes.lrc.lyric
-      // 格式化歌词
       this.lyric = this.formatLyric(lyricStr)
     },
+
     // 把纯字符串歌词分割成数组 且计算歌词出现时间
     formatLyric(lyricStr: string) {
       let lyricArr = lyricStr.split(/[(\r\n)\r\n]+/).map((item: string) => {
@@ -75,7 +72,6 @@ export const usePlayerStore = defineStore('player', {
       // 每个歌词记录下一句歌词出现时间
       lyricArr.forEach((item, i) => {
         if (i === lyricArr.length - 1 || isNaN(lyricArr[i + 1].time)) {
-          // 异常歌词显示到下下句 或者直接只显示1.5s
           item.next = lyricArr[i + 2] ? lyricArr[i + 2].time : item.time + 1500
         } else {
           item.next = lyricArr[i + 1].time

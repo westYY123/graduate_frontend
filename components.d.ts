@@ -48,6 +48,7 @@ declare module '@vue/runtime-core' {
     FootPlayer: typeof import('./src/components/FootPlayer/index.vue')['default']
     Header: typeof import('./src/components/Header/index.vue')['default']
     Login: typeof import('./src/components/Login/index.vue')['default']
+    Register: typeof import('./src/components/Login/register.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SongDetails: typeof import('./src/components/FootPlayer/SongDetails.vue')['default']
