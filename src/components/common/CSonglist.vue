@@ -34,6 +34,7 @@ import {defineProps, withDefaults, watch, computed, onBeforeMount} from 'vue'
 import type { PropType } from 'vue'
 import {userInfoApi} from "@/api/user";
 import {likeSongApi} from "@/api/song";
+import {ElMessage} from "element-plus";
 const route = useRoute()
 const router = useRouter()
 const store = usePlayerStore()
@@ -74,7 +75,9 @@ async function playSong(row: any) {
 }
 
 async function addLikeSong(id: string) {
+  ElMessage.success("操作成功")
   const res: any = await likeSongApi(id)
+
 }
 
 function toSingerDetails(id: number) {
